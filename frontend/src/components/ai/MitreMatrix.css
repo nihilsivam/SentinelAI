@@ -1,0 +1,54 @@
+.mitre-card{
+    background:#1F2937;
+    border:1px solid #374151;
+    border-radius:14px;
+    padding:22px;
+    height:100%;
+}
+
+.mitre-card h3{
+    color:white;
+    margin-bottom:20px;
+}
+
+.mitre-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.mitre-item{
+    background:#111827;
+    border:1px solid #374151;
+    border-radius:10px;
+    padding:14px;
+    min-height:85px;
+    transition:.25s;
+}
+
+.mitre-item:hover{
+    border-color:#2563EB;
+    transform:translateY(-3px);
+}
+
+.mitre-item strong{
+    color:white;
+    display:block;
+    margin-bottom:8px;
+    font-size:13px;
+}
+
+.mitre-item p{
+    color:#FCA5A5;
+    font-size:12px;
+}
+
+.mitre-item span{
+    color:#9CA3AF;
+    font-size:11px;
+}
+
+.active{
+    border:2px solid #EF4444;
+    background:rgba(239,68,68,.12);
+}

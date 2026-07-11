@@ -1,0 +1,19 @@
+.donut-chart-card {
+  width: 100%;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.donut-chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+.donut-chart-card h2 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
