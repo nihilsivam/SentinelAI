@@ -10,10 +10,13 @@ from app.engines.risk_engine import calculate_risk
 from app.engines.correlation_engine import correlate_incidents
 from app.engines.compliance_engine import map_compliance
 
+from app.services.dashboard_service import build_dashboard
+
 
 def process_pipeline():
 
     baseline_controls = load_baseline_controls()
+
     change_events = load_change_events()
 
     detected_drifts = detect_drift(
@@ -39,4 +42,19 @@ def process_incidents():
     return map_compliance(
         incidents,
         compliance_mapping
+    )
+
+
+def process_dashboard():
+
+    baseline_controls = load_baseline_controls()
+
+    risk_data = process_pipeline()
+
+    incidents = process_incidents()
+
+    return build_dashboard(
+        baseline_controls,
+        risk_data,
+        incidents
     )

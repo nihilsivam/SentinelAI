@@ -7,7 +7,8 @@ from app.services.json_loader import (
 
 from app.services.pipeline import (
     process_pipeline,
-    process_incidents
+    process_incidents,
+    process_dashboard
 )
 
 app = FastAPI(
@@ -81,5 +82,16 @@ def compliance():
     return {
         "status": "success",
         "count": len(data),
+        "data": data
+    }
+
+
+@app.get("/dashboard")
+def dashboard():
+
+    data = process_dashboard()
+
+    return {
+        "status": "success",
         "data": data
     }
