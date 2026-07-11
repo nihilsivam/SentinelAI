@@ -1,0 +1,41 @@
+[
+  {
+    "event_id": "EVT001",
+    "timestamp": "2026-07-11T10:00:00",
+    "control_id": "LOG001",
+    "parameter": "cloudtrail_enabled",
+    "baseline_value": true,
+    "current_value": false,
+    "changed_by": "admin01",
+    "change_source": "manual",
+    "approval_status": "pending",
+    "environment": "Production",
+    "maintenance_window": false
+  },
+  {
+    "event_id": "EVT002",
+    "timestamp": "2026-07-11T10:05:00",
+    "control_id": "FW001",
+    "parameter": "allow_port_22",
+    "baseline_value": false,
+    "current_value": true,
+    "changed_by": "cicd_pipeline",
+    "change_source": "CI/CD",
+    "approval_status": "approved",
+    "environment": "Production",
+    "maintenance_window": true
+  },
+  {
+    "event_id": "EVT003",
+    "timestamp": "2026-07-11T10:08:00",
+    "control_id": "IAM001",
+    "parameter": "mfa_enabled",
+    "baseline_value": true,
+    "current_value": false,
+    "changed_by": "admin02",
+    "change_source": "manual",
+    "approval_status": "pending",
+    "environment": "Production",
+    "maintenance_window": false
+  }
+]

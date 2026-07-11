@@ -1,0 +1,34 @@
+[
+  {
+    "control_id": "LOG001",
+    "domain": "Logging",
+    "parameter": "cloudtrail_enabled",
+    "baseline_value": true,
+    "severity_if_drifted": "CRITICAL",
+    "environment": "Production"
+  },
+  {
+    "control_id": "FW001",
+    "domain": "Firewall",
+    "parameter": "allow_port_22",
+    "baseline_value": false,
+    "severity_if_drifted": "HIGH",
+    "environment": "Production"
+  },
+  {
+    "control_id": "IAM001",
+    "domain": "IAM",
+    "parameter": "mfa_enabled",
+    "baseline_value": true,
+    "severity_if_drifted": "CRITICAL",
+    "environment": "Production"
+  },
+  {
+    "control_id": "EP001",
+    "domain": "Endpoint",
+    "parameter": "agent_running",
+    "baseline_value": true,
+    "severity_if_drifted": "HIGH",
+    "environment": "Production"
+  }
+]
