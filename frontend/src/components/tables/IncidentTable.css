@@ -1,0 +1,129 @@
+.incident-table-container {
+  margin-top: 30px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.table-header h2 {
+  color: white;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+}
+
+.filters button {
+  background: #0f172a;
+  color: white;
+  border: 1px solid #334155;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.incident-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.incident-table th,
+.incident-table td {
+  padding: 16px;
+  text-align: left;
+}
+
+.incident-table th {
+  color: #94a3b8;
+  border-bottom: 1px solid #334155;
+}
+
+.incident-table td {
+  color: white;
+  border-bottom: 1px solid #334155;
+}
+
+.priority {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.p1 {
+  background: #ef4444;
+}
+
+.p2 {
+  background: #f59e0b;
+}
+
+.p3 {
+  background: #3b82f6;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.status.open {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.status.investigating {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.status.resolved {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.risk-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.risk-bar {
+  width: 100px;
+  height: 8px;
+  background: #334155;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.risk-fill {
+  height: 100%;
+  background: #3b82f6;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  background: #0f172a;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: #2563eb;
+}

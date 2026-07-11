@@ -1,34 +1,27 @@
 import MetricsGrid from "../../components/cards/MetricsGrid";
 import LineChartCard from "../../components/charts/LineChartCard";
 import DonutChartCard from "../../components/charts/DonutChartCard";
+import IncidentTable from "../../components/tables/IncidentTable";
+
+import "./Dashboard.css";
 
 function Dashboard() {
   return (
-    <>
-      <h1
-        style={{
-          color: "white",
-          fontSize: "48px",
-          marginBottom: "30px",
-        }}
-      >
-        Security Dashboard
-      </h1>
+    <div className="dashboard">
+      <h1 className="dashboard-title">Security Dashboard</h1>
 
+      {/* KPI Cards */}
       <MetricsGrid />
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "2fr 1fr",
-          gap: "24px",
-          marginTop: "30px",
-        }}
-      >
+      {/* Charts */}
+      <div className="charts-grid">
         <LineChartCard />
         <DonutChartCard />
       </div>
-    </>
+
+      {/* Critical Incidents */}
+      <IncidentTable />
+    </div>
   );
 }
 
