@@ -1,15 +1,14 @@
 from fastapi import FastAPI
 
-# Import JSON Loader functions
 from app.services.json_loader import (
     load_baseline_controls,
     load_change_events
 )
 
-# Import Engines
-from app.engines.drift_engine import detect_drift
-from app.engines.suppression_engine import suppress_benign_changes
-
+from app.services.pipeline import (
+    process_pipeline,
+    process_incidents
+)
 
 app = FastAPI(
     title="SentinelAI API",
@@ -18,68 +17,63 @@ app = FastAPI(
 )
 
 
-# --------------------------------------------------
-# Home API
-# --------------------------------------------------
 @app.get("/")
 def home():
     return {
-        "message": "Welcome to SentinelAI",
-        "status": "Backend Running"
+        "status": "success",
+        "message": "Welcome to SentinelAI"
     }
 
 
-# --------------------------------------------------
-# Baseline Controls API
-# --------------------------------------------------
 @app.get("/baseline")
 def baseline():
-    return load_baseline_controls()
+    return {
+        "status": "success",
+        "count": len(load_baseline_controls()),
+        "data": load_baseline_controls()
+    }
 
 
-# --------------------------------------------------
-# Change Events API
-# --------------------------------------------------
 @app.get("/events")
 def events():
-    return load_change_events()
+    return {
+        "status": "success",
+        "count": len(load_change_events()),
+        "data": load_change_events()
+    }
 
 
-# --------------------------------------------------
-# Drift Detection API
-# --------------------------------------------------
-@app.get("/drift")
-def drift():
+@app.get("/pipeline")
+def pipeline():
 
-    baseline_controls = load_baseline_controls()
+    data = process_pipeline()
 
-    change_events = load_change_events()
-
-    detected_drifts = detect_drift(
-        baseline_controls,
-        change_events
-    )
-
-    return detected_drifts
+    return {
+        "status": "success",
+        "count": len(data),
+        "data": data
+    }
 
 
-# --------------------------------------------------
-# Benign Change Suppression API
-# --------------------------------------------------
-@app.get("/suppressed")
-def suppressed():
+@app.get("/risk")
+def risk():
 
-    baseline_controls = load_baseline_controls()
+    data = process_pipeline()
 
-    change_events = load_change_events()
+    return {
+        "status": "success",
+        "count": len(data),
+        "data": data
+    }
 
-    detected_drifts = detect_drift(
-        baseline_controls,
-        change_events
-    )
 
-    risky_drifts = suppress_benign_changes(
-        detected_drifts
-    )
+@app.get("/incidents")
+def incidents():
 
-    return risky_drifts
+    data = process_incidents()
+
+    return {
+        "status": "success",
+        "count": len(data),
+        "data": data
+    }
