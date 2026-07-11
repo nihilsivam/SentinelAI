@@ -11,12 +11,18 @@ from app.engines.correlation_engine import correlate_incidents
 from app.engines.compliance_engine import map_compliance
 
 from app.services.dashboard_service import build_dashboard
+from app.services.investigation_service import build_investigation
+from app.services.timeline_service import build_timeline
+from app.services.mitre_service import build_mitre
+from app.services.compliance_service import build_compliance
+
 from app.ai.ai_summary import generate_ai_summary
 
 
 # --------------------------------------------------
 # Security Processing Pipeline
 # --------------------------------------------------
+
 def process_pipeline():
 
     baseline_controls = load_baseline_controls()
@@ -42,6 +48,7 @@ def process_pipeline():
 # --------------------------------------------------
 # Incident Processing
 # --------------------------------------------------
+
 def process_incidents():
 
     risk_data = process_pipeline()
@@ -63,6 +70,7 @@ def process_incidents():
 # --------------------------------------------------
 # Dashboard Processing
 # --------------------------------------------------
+
 def process_dashboard():
 
     baseline_controls = load_baseline_controls()
@@ -77,12 +85,65 @@ def process_dashboard():
         incidents
     )
 
-    return dashboard
+    investigation = build_investigation(
+        dashboard["top_risks"]
+    )
+
+    timeline = build_timeline(
+        incidents
+    )
+
+    mitre = build_mitre(
+        dashboard["top_risks"]
+    )
+
+    compliance = build_compliance(
+        dashboard["compliance_summary"]
+    )
+
+    ai_summary = generate_ai_summary(
+        incidents
+    )
+
+    return {
+
+        "metrics": dashboard["summary"],
+
+        "charts": {
+
+            "risk_distribution":
+                dashboard["risk_distribution"]
+
+        },
+
+        "compliance":
+            compliance,
+
+        "incidents":
+            dashboard["recent_incidents"],
+
+        "top_risks":
+            dashboard["top_risks"],
+
+        "investigation":
+            investigation,
+
+        "timeline":
+            timeline,
+
+        "mitre":
+            mitre,
+
+        "ai_summary":
+            ai_summary
+
+    }
 
 
 # --------------------------------------------------
 # AI Summary Processing
 # --------------------------------------------------
+
 def process_ai_summary():
 
     incidents = process_incidents()

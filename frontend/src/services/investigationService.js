@@ -7,6 +7,7 @@ export const getInvestigation = async () => {
     return Promise.resolve(investigation);
   }
 
-  const response = await api.get("/investigation");
-  return response.data;
+  const response = await api.get("/dashboard");
+
+  return response.data.data.investigation;
 };

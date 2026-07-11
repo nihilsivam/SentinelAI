@@ -13,6 +13,14 @@ export const getComplianceData = async () => {
     });
   }
 
-  const response = await api.get("/compliance");
-  return response.data;
+  const response = await api.get("/dashboard");
+
+  return {
+    frameworks: response.data.data.compliance,
+
+    // Backend timeline already exists.
+    // If your compliance page expects a separate configuration timeline,
+    // we'll wire it here for now.
+    configurationTimeline: response.data.data.timeline,
+  };
 };
