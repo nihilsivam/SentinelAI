@@ -1,0 +1,38 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  height: 70vh;
+  color: white;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 70px;
+}
+
+.error-container h2 {
+  font-size: 30px;
+}
+
+.error-container p {
+  color: #94A3B8;
+}
+
+.retry-button {
+  margin-top: 10px;
+  border: none;
+  background: #2563EB;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: .25s;
+}
+
+.retry-button:hover {
+  background: #1D4ED8;
+}

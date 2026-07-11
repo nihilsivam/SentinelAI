@@ -7,6 +7,9 @@ import DonutChartCard from "../../components/charts/DonutChartCard";
 import IncidentTable from "../../components/tables/IncidentTable";
 import AIInvestigationCard from "../../components/ai/AIInvestigationCard";
 
+import LoadingSpinner from "../../components/common/LoadingSpinner";
+import ErrorState from "../../components/common/ErrorState";
+
 import { getDashboardMetrics } from "../../services/dashboardService";
 import { getChartData } from "../../services/chartService";
 import { getIncidents } from "../../services/incidentService";
@@ -37,7 +40,7 @@ function Dashboard() {
         setInvestigation(investigationData);
       } catch (err) {
         console.error(err);
-        setError("Unable to load dashboard.");
+        setError("Unable to load SentinelAI dashboard.");
       } finally {
         setLoading(false);
       }
@@ -47,19 +50,11 @@ function Dashboard() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="dashboard-loading">
-        <h2>Loading Dashboard...</h2>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return (
-      <div className="dashboard-error">
-        <h2>{error}</h2>
-      </div>
-    );
+    return <ErrorState message={error} />;
   }
 
   return (
