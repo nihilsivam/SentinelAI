@@ -9,11 +9,9 @@ import {
   Legend,
 } from "recharts";
 
-import { securityTrend } from "../../data/chartData";
-
 import "./LineChartCard.css";
 
-function LineChartCard() {
+function LineChartCard({ securityTrend }) {
   return (
     <div className="line-chart-card">
       <h2>Security Health Trend</h2>
@@ -22,14 +20,9 @@ function LineChartCard() {
         <LineChart data={securityTrend}>
           <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
 
-          <XAxis
-            dataKey="day"
-            stroke="#94A3B8"
-          />
+          <XAxis dataKey="day" stroke="#94A3B8" />
 
-          <YAxis
-            stroke="#94A3B8"
-          />
+          <YAxis stroke="#94A3B8" />
 
           <Tooltip />
 

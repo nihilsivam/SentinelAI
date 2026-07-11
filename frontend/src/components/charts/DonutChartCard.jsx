@@ -7,8 +7,6 @@ import {
   Legend,
 } from "recharts";
 
-import { driftDistribution } from "../../data/chartData";
-
 import "./DonutChartCard.css";
 
 const COLORS = [
@@ -18,7 +16,7 @@ const COLORS = [
   "#EF4444",
 ];
 
-function DonutChartCard() {
+function DonutChartCard({ driftDistribution }) {
   return (
     <div className="donut-chart-card">
       <h2>Drift Distribution</h2>
@@ -42,6 +40,7 @@ function DonutChartCard() {
           </Pie>
 
           <Tooltip />
+
           <Legend />
         </PieChart>
       </ResponsiveContainer>

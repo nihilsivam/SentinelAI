@@ -1,7 +1,6 @@
-import { incidents } from "../../data/incidentsData";
 import "./IncidentTable.css";
 
-function IncidentTable() {
+function IncidentTable({ incidents }) {
   return (
     <div className="incident-table-container">
       <div className="table-header">

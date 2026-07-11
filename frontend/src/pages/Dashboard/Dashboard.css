@@ -29,3 +29,13 @@
     grid-template-columns: 1fr;
   }
 }
+.dashboard-loading,
+.dashboard-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+}

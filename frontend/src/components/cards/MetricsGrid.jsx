@@ -1,8 +1,7 @@
 import "./MetricsGrid.css";
 import MetricCard from "./MetricCard";
-import { metrics } from "../../data/dashboardData";
 
-function MetricsGrid() {
+function MetricsGrid({ metrics }) {
   return (
     <div className="metrics-grid">
       {metrics.map((metric, index) => (
