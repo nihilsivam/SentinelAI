@@ -3,7 +3,13 @@ import Navbar from "./Navbar";
 
 function MainLayout({ children }) {
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        background: "#0f172a",
+      }}
+    >
       <Sidebar />
 
       <div
@@ -18,7 +24,8 @@ function MainLayout({ children }) {
         <main
           style={{
             flex: 1,
-            padding: "20px",
+            padding: "24px",
+            background: "#0f172a",
           }}
         >
           {children}
