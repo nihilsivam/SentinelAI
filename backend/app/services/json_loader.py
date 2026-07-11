@@ -1,21 +1,25 @@
 import json
 from pathlib import Path
 
-# Project Root
 BASE_DIR = Path(__file__).resolve().parents[3]
 
 DATASET_DIR = BASE_DIR / "datasets"
 
 
-def load_baseline_controls():
-    file_path = DATASET_DIR / "baseline_controls.json"
+def load_json(filename):
+    file_path = DATASET_DIR / filename
 
     with open(file_path, "r") as file:
         return json.load(file)
+
+
+def load_baseline_controls():
+    return load_json("baseline_controls.json")
 
 
 def load_change_events():
-    file_path = DATASET_DIR / "change_events.json"
+    return load_json("change_events.json")
 
-    with open(file_path, "r") as file:
-        return json.load(file)
+
+def load_compliance_mapping():
+    return load_json("compliance_mapping.json")

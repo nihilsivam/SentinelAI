@@ -27,26 +27,20 @@ def home():
 
 @app.get("/baseline")
 def baseline():
+
+    data = load_baseline_controls()
+
     return {
         "status": "success",
-        "count": len(load_baseline_controls()),
-        "data": load_baseline_controls()
+        "count": len(data),
+        "data": data
     }
 
 
 @app.get("/events")
 def events():
-    return {
-        "status": "success",
-        "count": len(load_change_events()),
-        "data": load_change_events()
-    }
 
-
-@app.get("/pipeline")
-def pipeline():
-
-    data = process_pipeline()
+    data = load_change_events()
 
     return {
         "status": "success",
@@ -69,6 +63,18 @@ def risk():
 
 @app.get("/incidents")
 def incidents():
+
+    data = process_incidents()
+
+    return {
+        "status": "success",
+        "count": len(data),
+        "data": data
+    }
+
+
+@app.get("/compliance")
+def compliance():
 
     data = process_incidents()
 
