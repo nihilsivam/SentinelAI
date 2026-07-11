@@ -1,26 +1,44 @@
+import "./Dashboard.css";
+
 import MetricsGrid from "../../components/cards/MetricsGrid";
+
 import LineChartCard from "../../components/charts/LineChartCard";
 import DonutChartCard from "../../components/charts/DonutChartCard";
+
 import IncidentTable from "../../components/tables/IncidentTable";
 
-import "./Dashboard.css";
+import AIInvestigationCard from "../../components/ai/AIInvestigationCard";
+
+import { investigation } from "../../data/aiInvestigationData";
 
 function Dashboard() {
   return (
     <div className="dashboard">
-      <h1 className="dashboard-title">Security Dashboard</h1>
+      {/* Page Title */}
+      <h1 className="dashboard-title">
+        Security Dashboard
+      </h1>
 
-      {/* KPI Cards */}
+      {/* KPI Metrics */}
       <MetricsGrid />
 
       {/* Charts */}
-      <div className="charts-grid">
+      <section className="charts-grid">
         <LineChartCard />
         <DonutChartCard />
-      </div>
+      </section>
 
       {/* Critical Incidents */}
-      <IncidentTable />
+      <section className="table-section">
+        <IncidentTable />
+      </section>
+
+      {/* AI Investigation */}
+      <section className="ai-section">
+        <AIInvestigationCard
+          investigation={investigation}
+        />
+      </section>
     </div>
   );
 }

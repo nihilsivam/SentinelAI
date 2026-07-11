@@ -1,0 +1,20 @@
+.attack-card{
+    background:#78350f;
+    border-radius:14px;
+    padding:24px;
+}
+
+.attack-card h4{
+    margin-bottom:20px;
+}
+
+.attack-card h2{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.confidence{
+    margin-top:20px;
+    color:#FCD34D;
+    font-weight:bold;
+}

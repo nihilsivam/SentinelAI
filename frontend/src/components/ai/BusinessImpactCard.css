@@ -1,0 +1,57 @@
+.impact-card{
+
+    background:linear-gradient(135deg,#7F1D1D,#991B1B);
+
+    border:1px solid #DC2626;
+
+    border-radius:14px;
+
+    padding:22px;
+
+    color:white;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.impact-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 30px rgba(220,38,38,.25);
+
+}
+
+.impact-card h3{
+
+    margin-bottom:16px;
+
+}
+
+.impact-card h2{
+
+    font-size:24px;
+
+    margin-bottom:14px;
+
+}
+
+.impact-card p{
+
+    color:#FECACA;
+
+}
+
+.loss-value{
+
+    margin-top:10px;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#FCA5A5;
+
+}
