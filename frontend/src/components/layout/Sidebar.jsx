@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 
 import { NavLink } from "react-router-dom";
+import "./Sidebar.css";
 
 const menuItems = [
   { name: "Dashboard", icon: <FiHome />, path: "/dashboard" },
@@ -24,115 +25,36 @@ const menuItems = [
 
 function Sidebar() {
   return (
-    <div
-      style={{
-        width: "260px",
-        background: "#111827",
-        color: "white",
-        display: "flex",
-        flexDirection: "column",
-        padding: "24px",
-      }}
-    >
-      {/* Logo */}
-      <div>
-        <h2
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-          }}
-        >
-          🛡 SentinelAI
-        </h2>
-
-        <p
-          style={{
-            color: "#9CA3AF",
-            fontSize: "14px",
-            marginTop: "8px",
-          }}
-        >
-          Drift Detection
-        </p>
+    <aside className="sidebar">
+      <div className="logo-section">
+        <h2 className="logo-title">🛡 SentinelAI</h2>
+        <p className="logo-subtitle">Drift Detection</p>
       </div>
 
-      {/* Menu */}
-      <div
-        style={{
-          marginTop: "40px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
+      <nav className="menu">
         {menuItems.map((item) => (
           <NavLink
             key={item.name}
             to={item.path}
-            style={({ isActive }) => ({
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-              padding: "12px",
-              borderRadius: "10px",
-              textDecoration: "none",
-              color: "white",
-              background: isActive ? "#2563EB" : "transparent",
-              transition: "0.2s",
-            })}
+            className={({ isActive }) =>
+              isActive ? "menu-item active" : "menu-item"
+            }
           >
             {item.icon}
             <span>{item.name}</span>
           </NavLink>
         ))}
-      </div>
+      </nav>
 
-      {/* Profile */}
-      <div
-        style={{
-          marginTop: "auto",
-          paddingTop: "20px",
-          borderTop: "1px solid #374151",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
-          <div
-            style={{
-              width: "45px",
-              height: "45px",
-              borderRadius: "50%",
-              background: "#2563EB",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: "bold",
-            }}
-          >
-            C
-          </div>
+      <div className="profile">
+        <div className="avatar">C</div>
 
-          <div>
-            <h4>C. Moreau</h4>
-
-            <p
-              style={{
-                color: "#9CA3AF",
-                fontSize: "13px",
-              }}
-            >
-              Senior SOC Analyst
-            </p>
-          </div>
+        <div>
+          <h4>C. Moreau</h4>
+          <p>Senior SOC Analyst</p>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }
 

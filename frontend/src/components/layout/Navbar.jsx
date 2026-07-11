@@ -1,41 +1,44 @@
+import {
+  FiSearch,
+  FiRefreshCw,
+  FiBell,
+  FiUser,
+} from "react-icons/fi";
+
+import "./Navbar.css";
+
 function Navbar() {
   return (
-    <div
-      style={{
-        height: "70px",
-        background: "#111827",
-        borderBottom: "1px solid #374151",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "0 24px",
-      }}
-    >
-      <div>
-        <h3>Security Operations Center</h3>
-
-        <p
-          style={{
-            fontSize: "13px",
-            color: "#9CA3AF",
-          }}
-        >
-          Societe Generale CIB
-        </p>
+    <header className="navbar">
+      <div className="navbar-left">
+        <h2>Security Operations Center</h2>
+        <p>Societe Generale CIB</p>
       </div>
 
-      <input
-        placeholder="Search..."
-        style={{
-          width: "300px",
-          padding: "10px",
-          borderRadius: "8px",
-          border: "none",
-        }}
-      />
+      <div className="navbar-center">
+        <div className="search-box">
+          <FiSearch />
+          <input
+            type="text"
+            placeholder="Search assets, incidents..."
+          />
+        </div>
+      </div>
 
-      <div>🔄 🔔 👤</div>
-    </div>
+      <div className="navbar-right">
+        <button className="icon-btn">
+          <FiRefreshCw />
+        </button>
+
+        <button className="icon-btn">
+          <FiBell />
+        </button>
+
+        <button className="icon-btn">
+          <FiUser />
+        </button>
+      </div>
+    </header>
   );
 }
 
