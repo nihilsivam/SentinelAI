@@ -18,8 +18,7 @@ function Compliance() {
 
         const data = await getComplianceData();
 
-        setIncidents(data.incidents);
-
+        setIncidents(data.incidents || []);
       } catch (err) {
 
         console.error(err);
