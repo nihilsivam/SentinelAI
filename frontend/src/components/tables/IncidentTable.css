@@ -17,9 +17,35 @@
   color: white;
 }
 
+/* ===========================
+   Filters & Search
+=========================== */
+
 .filters {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-box {
+  width: 320px;
+  padding: 10px 16px;
+  background: #0f172a;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search-box::placeholder {
+  color: #94a3b8;
+}
+
+.search-box:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
 }
 
 .filters button {
@@ -29,7 +55,16 @@
   padding: 8px 14px;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
 }
+
+.filters button:hover {
+  background: #2563eb;
+}
+
+/* ===========================
+   Table
+=========================== */
 
 .incident-table {
   width: 100%;
@@ -52,6 +87,10 @@
   border-bottom: 1px solid #334155;
 }
 
+/* ===========================
+   Priority Badge
+=========================== */
+
 .priority {
   padding: 6px 12px;
   border-radius: 8px;
@@ -69,6 +108,10 @@
 .p3 {
   background: #3b82f6;
 }
+
+/* ===========================
+   Status Badge
+=========================== */
 
 .status {
   padding: 6px 12px;
@@ -91,6 +134,10 @@
   color: #10b981;
 }
 
+/* ===========================
+   Risk Bar
+=========================== */
+
 .risk-cell {
   display: flex;
   align-items: center;
@@ -110,6 +157,10 @@
   background: #3b82f6;
 }
 
+/* ===========================
+   Action Buttons
+=========================== */
+
 .actions {
   display: flex;
   gap: 8px;
@@ -122,8 +173,86 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .actions button:hover {
   background: #2563eb;
+}
+/* ===========================
+   Dropdown Filters
+=========================== */
+
+.filters select {
+  min-width: 150px;
+  padding: 10px 14px;
+  background: #0f172a;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filters select:hover {
+  border-color: #2563eb;
+}
+
+.filters select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.filters option {
+  background: #0f172a;
+  color: white;
+}
+
+/* ===========================
+   Responsive Filters
+=========================== */
+
+@media (max-width: 1200px) {
+
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .filters select {
+    flex: 1;
+    min-width: 180px;
+  }
+
+}
+.priority.critical {
+  background: #ef4444;
+  color: white;
+}
+
+.priority.high {
+  background: #f59e0b;
+  color: white;
+}
+
+.priority.medium {
+  background: #3b82f6;
+  color: white;
+}
+
+.priority.low {
+  background: #10b981;
+  color: white;
 }

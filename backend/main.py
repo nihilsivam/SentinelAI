@@ -1,5 +1,5 @@
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.services.json_loader import (
     load_baseline_controls,
@@ -18,6 +18,10 @@ app = FastAPI(
     description="AI-Powered Security Control Drift & Compliance Intelligence Platform",
     version="1.0.0"
 )
+
+# -----------------------------
+# CORS Configuration
+# -----------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -28,6 +32,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.get("/")
 def home():

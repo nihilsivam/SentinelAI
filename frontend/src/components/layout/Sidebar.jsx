@@ -15,7 +15,7 @@ import "./Sidebar.css";
 const menuItems = [
   { name: "Dashboard", icon: <FiHome />, path: "/dashboard" },
   { name: "Incidents", icon: <FiAlertTriangle />, path: "/incidents" },
-  { name: "Assets", icon: <FiDatabase />, path: "/assets" },
+  { name: "Controls", icon: <FiDatabase />, path: "/assets" },
   { name: "Compliance", icon: <FiShield />, path: "/compliance" },
   { name: "MITRE ATT&CK", icon: <FiTarget />, path: "/mitre" },
   { name: "AI Investigation", icon: <FiCpu />, path: "/ai" },

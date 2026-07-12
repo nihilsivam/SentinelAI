@@ -1,11 +1,12 @@
 from app.services.json_loader import (
     load_baseline_controls,
-    load_change_events,
     load_compliance_mapping
 )
 
-from app.engines.drift_engine import detect_drift
-from app.engines.suppression_engine import suppress_benign_changes
+from app.services.csv_loader import (
+    load_csv_events
+)
+
 from app.engines.risk_engine import calculate_risk
 from app.engines.correlation_engine import correlate_incidents
 from app.engines.compliance_engine import map_compliance
@@ -25,24 +26,15 @@ from app.ai.ai_summary import generate_ai_summary
 
 def process_pipeline():
 
-    baseline_controls = load_baseline_controls()
+    csv_events = load_csv_events()
 
-    change_events = load_change_events()
+    risky_events = [
+        event
+        for event in csv_events
+        if event["status"] == "DRIFT DETECTED"
+    ]
 
-    detected_drifts = detect_drift(
-        baseline_controls,
-        change_events
-    )
-
-    risky_drifts = suppress_benign_changes(
-        detected_drifts
-    )
-
-    risk_data = calculate_risk(
-        risky_drifts
-    )
-
-    return risk_data
+    return calculate_risk(risky_events)
 
 
 # --------------------------------------------------
@@ -53,18 +45,14 @@ def process_incidents():
 
     risk_data = process_pipeline()
 
-    incidents = correlate_incidents(
-        risk_data
-    )
+    incidents = correlate_incidents(risk_data)
 
     compliance_mapping = load_compliance_mapping()
 
-    incidents = map_compliance(
+    return map_compliance(
         incidents,
         compliance_mapping
     )
-
-    return incidents
 
 
 # --------------------------------------------------
@@ -75,12 +63,15 @@ def process_dashboard():
 
     baseline_controls = load_baseline_controls()
 
+    all_events = load_csv_events()
+
     risk_data = process_pipeline()
 
     incidents = process_incidents()
 
     dashboard = build_dashboard(
         baseline_controls,
+        all_events,
         risk_data,
         incidents
     )
@@ -110,10 +101,8 @@ def process_dashboard():
         "metrics": dashboard["summary"],
 
         "charts": {
-
             "risk_distribution":
                 dashboard["risk_distribution"]
-
         },
 
         "compliance":
@@ -148,8 +137,6 @@ def process_ai_summary():
 
     incidents = process_incidents()
 
-    summary = generate_ai_summary(
+    return generate_ai_summary(
         incidents
     )
-
-    return summary

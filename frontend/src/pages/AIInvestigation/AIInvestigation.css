@@ -1,0 +1,104 @@
+.ai-page{
+    padding:30px;
+}
+
+.ai-page h1{
+    color:white;
+}
+
+.ai-page p{
+    color:#94A3B8;
+}
+
+.incident-select{
+
+    margin:25px 0;
+
+    padding:12px;
+
+    width:280px;
+
+    background:#1E293B;
+
+    color:white;
+
+    border:1px solid #334155;
+
+    border-radius:8px;
+
+}
+
+.ai-card{
+
+    background:#1E293B;
+
+    border:1px solid #334155;
+
+    border-radius:14px;
+
+    padding:30px;
+
+}
+
+.ai-card h2,
+.ai-card h3{
+
+    color:white;
+
+}
+
+.ai-card p{
+
+    color:#CBD5E1;
+
+    line-height:1.7;
+
+}
+
+.badge-row{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.severity{
+
+    background:#EF4444;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+}
+
+.risk{
+
+    background:#2563EB;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+}
+
+.ai-card ul{
+
+    margin-top:15px;
+
+    color:white;
+
+}
+
+.ai-card li{
+
+    margin-bottom:10px;
+
+}

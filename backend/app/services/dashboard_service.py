@@ -1,83 +1,128 @@
+from collections import Counter
+
+
 def build_dashboard(
     baseline_controls,
+    all_events,
     risk_data,
     incidents
 ):
 
-    total_controls = len(baseline_controls)
-    active_drifts = len(risk_data)
-    healthy_controls = total_controls - active_drifts
+    total_events = len(all_events)
 
-    critical_incidents = sum(
-        1
-        for incident in incidents
-        if incident["overall_risk"] >= 90
-    )
+    active_drifts = len(risk_data)
+
+    healthy_events = total_events - active_drifts
 
     compliance_score = round(
-        (healthy_controls / total_controls) * 100,
+        (healthy_events / total_events) * 100,
         1
-    )
+    ) if total_events else 0
 
-    if active_drifts == 0:
-        overall_risk = 0
-    else:
-        overall_risk = round(
-            sum(item["risk_score"] for item in risk_data)
-            / active_drifts,
-            1
-        )
+    overall_risk = round(
+        sum(item["risk_score"] for item in risk_data) / active_drifts,
+        1
+    ) if active_drifts else 0
 
-    # ----------------------------
-    # Risk Distribution
-    # ----------------------------
+    critical = 0
+    high = 0
+    medium = 0
+    low = 0
 
-    risk_distribution = {
-        "critical": 0,
-        "high": 0,
-        "medium": 0,
-        "low": 0
-    }
+    anomaly_types = []
 
     for item in risk_data:
 
-        level = item["risk_level"].lower()
+        anomaly_types.append(
+            item["parameter"]
+        )
 
-        if level in risk_distribution:
-            risk_distribution[level] += 1
+        level = item["risk_level"].upper()
 
-    # ----------------------------
-    # Compliance Summary
-    # ----------------------------
+        if level == "CRITICAL":
+            critical += 1
+
+        elif level == "HIGH":
+            high += 1
+
+        elif level == "MEDIUM":
+            medium += 1
+
+        else:
+            low += 1
+
+    critical_incidents = len([
+        incident
+        for incident in incidents
+        if incident["overall_risk"] >= 90
+    ])
+
+    risk_distribution = {
+
+        "critical": critical,
+
+        "high": high,
+
+        "medium": medium,
+
+        "low": low
+
+    }
 
     compliance_summary = {
+
         "NIST": set(),
+
         "CIS": set(),
+
         "GDPR": set()
+
     }
 
     for incident in incidents:
 
-        compliance = incident.get("compliance", {})
+        compliance = incident.get(
+            "compliance",
+            {}
+        )
 
         for framework in compliance:
 
-            compliance_summary[framework].update(
+            compliance_summary[
+                framework
+            ].update(
                 compliance[framework]
             )
 
     compliance_summary = {
+
         key: len(value)
+
         for key, value in compliance_summary.items()
+
     }
+
+    top_risks = sorted(
+
+        risk_data,
+
+        key=lambda x: x["risk_score"],
+
+        reverse=True
+
+    )[:10]
+
+    drift_counter = Counter(anomaly_types)
+
+    most_common = drift_counter.most_common(5)
 
     return {
 
         "summary": {
 
-            "total_controls": total_controls,
+            "total_controls": total_events,
 
-            "healthy_controls": healthy_controls,
+            "healthy_controls": healthy_events,
 
             "active_drifts": active_drifts,
 
@@ -86,17 +131,29 @@ def build_dashboard(
             "overall_risk": overall_risk,
 
             "compliance_score": compliance_score
+
         },
 
         "risk_distribution": risk_distribution,
 
         "compliance_summary": compliance_summary,
 
-        "recent_incidents": incidents,
+        "recent_incidents": incidents[:10],
 
-        "top_risks": sorted(
-            risk_data,
-            key=lambda x: x["risk_score"],
-            reverse=True
-        )[:5]
+        "top_risks": top_risks,
+
+        "most_common_drifts": [
+
+            {
+
+                "type": drift,
+
+                "count": count
+
+            }
+
+            for drift, count in most_common
+
+        ]
+
     }

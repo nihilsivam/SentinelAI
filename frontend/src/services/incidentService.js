@@ -1,39 +1,56 @@
 import api from "./api";
 import { USE_MOCK } from "./config";
-import { incidents } from "../data/incidentsData";
+import { incidents as mockIncidents } from "../data/incidentsData";
 
 export const getIncidents = async () => {
+
   if (USE_MOCK) {
-    return Promise.resolve(incidents);
+    return Promise.resolve(mockIncidents);
   }
 
-  const response = await api.get("/dashboard");
+  const response = await api.get("/incidents");
 
-  const backendIncidents = response.data.data.incidents;
+  const backendIncidents = response.data.data;
 
-  return backendIncidents.map((incident) => ({
-    priority:
-      incident.overall_risk >= 90
-        ? "P1"
-        : incident.overall_risk >= 70
-        ? "P2"
-        : "P3",
+  return backendIncidents.map((incident) => {
 
-    asset: incident.events[0]?.control_id || "Unknown",
+    const event = incident.events[0];
 
-    control:
-      incident.events[0]?.parameter
+    return {
+
+      priority:
+        incident.risk_level === "CRITICAL"
+          ? "P1"
+          : incident.risk_level === "HIGH"
+          ? "P2"
+          : "P3",
+
+      asset: event.control_id,
+
+      control: event.parameter
         ?.replace(/_/g, " ")
-        ?.replace(/\b\w/g, (c) => c.toUpperCase()) || "Unknown",
+        ?.replace(/\b\w/g, (c) => c.toUpperCase()),
 
-    domain: incident.environment,
+      domain: incident.environment,
 
-    severity: incident.risk_level,
+      severity: event.severity,
 
-    risk: incident.overall_risk,
+      risk: incident.overall_risk,
 
-    status: "Open",
+      status: event.status
+        ? event.status.replace(/_/g, " ")
+        : "Open",
 
-    time: incident.events[0]?.timestamp || "-",
-  }));
+      time: event.timestamp
+        ? new Date(event.timestamp).toLocaleString()
+        : "-",
+
+      // Keep the original backend object so the
+      // Incident Details Modal can use it later.
+      raw: incident,
+
+    };
+
+  });
+
 };

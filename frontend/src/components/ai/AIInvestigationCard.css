@@ -1,5 +1,7 @@
 .ai-investigation{
+
     margin-top:40px;
+
 }
 
 .ai-header{
@@ -55,8 +57,6 @@
 
     font-weight:600;
 
-    transition:.25s;
-
 }
 
 .primary-btn{
@@ -64,14 +64,6 @@
     background:#2563EB;
 
     color:white;
-
-}
-
-.primary-btn:hover{
-
-    background:#1D4ED8;
-
-    transform:translateY(-2px);
 
 }
 
@@ -83,19 +75,11 @@
 
 }
 
-.secondary-btn:hover{
-
-    background:#4B5563;
-
-    transform:translateY(-2px);
-
-}
-
 .ai-layout{
 
     display:grid;
 
-    grid-template-columns:2fr 1fr;
+    grid-template-columns:1.4fr 1fr;
 
     gap:24px;
 
@@ -103,9 +87,9 @@
 
 .ai-left{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:repeat(2,1fr);
+    flex-direction:column;
 
     gap:24px;
 
@@ -122,12 +106,6 @@
 @media(max-width:1200px){
 
 .ai-layout{
-
-grid-template-columns:1fr;
-
-}
-
-.ai-left{
 
 grid-template-columns:1fr;
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
 import MetricsGrid from "../../components/cards/MetricsGrid";
-import LineChartCard from "../../components/charts/LineChartCard";
 import DonutChartCard from "../../components/charts/DonutChartCard";
 import IncidentTable from "../../components/tables/IncidentTable";
 import AIInvestigationCard from "../../components/ai/AIInvestigationCard";
@@ -17,7 +16,6 @@ import { getInvestigation } from "../../services/investigationService";
 
 function Dashboard() {
   const [metrics, setMetrics] = useState([]);
-  const [securityTrend, setSecurityTrend] = useState([]);
   const [driftDistribution, setDriftDistribution] = useState([]);
   const [incidents, setIncidents] = useState([]);
   const [investigation, setInvestigation] = useState(null);
@@ -34,7 +32,6 @@ function Dashboard() {
         const investigationData = await getInvestigation();
 
         setMetrics(metricsData);
-        setSecurityTrend(chartData.securityTrend);
         setDriftDistribution(chartData.driftDistribution);
         setIncidents(incidentsData);
         setInvestigation(investigationData);
@@ -49,25 +46,29 @@ function Dashboard() {
     loadDashboard();
   }, []);
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  if (loading) return <LoadingSpinner />;
 
-  if (error) {
-    return <ErrorState message={error} />;
-  }
+  if (error) return <ErrorState message={error} />;
 
   return (
     <div className="dashboard">
+      <div className="live-status">
+
+  <span className="status-dot"></span>
+
+  Monitoring Official Hackathon Dataset • 1000 Events Loaded
+
+</div>
       <h1 className="dashboard-title">
         Security Dashboard
       </h1>
 
       <MetricsGrid metrics={metrics} />
 
-      <section className="charts-grid">
-        <LineChartCard securityTrend={securityTrend} />
-        <DonutChartCard driftDistribution={driftDistribution} />
+      <section className="chart-center">
+        <DonutChartCard
+          driftDistribution={driftDistribution}
+        />
       </section>
 
       <section className="table-section">
@@ -81,6 +82,7 @@ function Dashboard() {
           />
         </section>
       )}
+
     </div>
   );
 }

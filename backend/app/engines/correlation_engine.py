@@ -1,4 +1,4 @@
-from datetime import datetime
+from collections import defaultdict
 
 
 def correlate_incidents(risk_data):
@@ -6,66 +6,43 @@ def correlate_incidents(risk_data):
     if not risk_data:
         return []
 
-    # Convert timestamps to datetime objects
-    sorted_events = sorted(
-        risk_data,
-        key=lambda x: datetime.fromisoformat(x["timestamp"])
-    )
+    grouped = defaultdict(list)
+
+    # Group similar events together
+    for event in risk_data:
+
+        key = (
+            event["environment"],
+            event["control_id"],
+            event["parameter"],
+        )
+
+        grouped[key].append(event)
 
     incidents = []
 
-    current_incident = {
-        "incident_id": "INC001",
-        "environment": sorted_events[0]["environment"],
-        "risk_level": "CRITICAL",
-        "overall_risk": 0,
-        "events": [],
-        "event_count": 0
-    }
+    for index, ((environment, control, parameter), events) in enumerate(grouped.items(), start=1):
 
-    previous_time = None
+        incidents.append({
 
-    for event in sorted_events:
+            "incident_id": f"INC{index:03}",
 
-        current_time = datetime.fromisoformat(event["timestamp"])
+            "environment": environment,
 
-        if previous_time is not None:
+            "risk_level": max(
+                events,
+                key=lambda e: e["risk_score"]
+            )["risk_level"],
 
-            difference = (
-                current_time - previous_time
-            ).total_seconds() / 60
+            "overall_risk": max(
+                event["risk_score"]
+                for event in events
+            ),
 
-            # If more than 15 minutes, start a new incident
-            if difference > 15:
+            "events": events,
 
-                current_incident["event_count"] = len(
-                    current_incident["events"]
-                )
+            "event_count": len(events)
 
-                incidents.append(current_incident)
-
-                current_incident = {
-                    "incident_id": f"INC{len(incidents)+1:03}",
-                    "environment": event["environment"],
-                    "risk_level": "CRITICAL",
-                    "overall_risk": 0,
-                    "events": [],
-                    "event_count": 0
-                }
-
-        current_incident["events"].append(event)
-
-        current_incident["overall_risk"] = max(
-            current_incident["overall_risk"],
-            event["risk_score"]
-        )
-
-        previous_time = current_time
-
-    current_incident["event_count"] = len(
-        current_incident["events"]
-    )
-
-    incidents.append(current_incident)
+        })
 
     return incidents

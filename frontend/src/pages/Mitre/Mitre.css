@@ -1,0 +1,77 @@
+.mitre-page{
+    padding:30px;
+}
+
+.mitre-page h1{
+    color:white;
+    margin-bottom:8px;
+}
+
+.mitre-page p{
+    color:#94A3B8;
+    margin-bottom:30px;
+}
+
+.mitre-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+
+    gap:20px;
+
+}
+
+.mitre-card{
+
+    background:#1E293B;
+
+    border:1px solid #334155;
+
+    border-radius:14px;
+
+    padding:24px;
+
+    transition:.3s;
+
+}
+
+.mitre-card:hover{
+
+    border-color:#2563EB;
+
+    transform:translateY(-4px);
+
+}
+
+.mitre-card h3{
+
+    color:#3B82F6;
+
+    font-size:18px;
+
+}
+
+.mitre-card h2{
+
+    color:white;
+
+    margin:10px 0;
+
+}
+
+.mitre-card p{
+
+    color:#CBD5E1;
+
+    min-height:45px;
+
+}
+
+.mitre-card span{
+
+    color:#10B981;
+
+    font-weight:bold;
+
+}

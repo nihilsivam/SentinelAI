@@ -1,0 +1,60 @@
+.compliance-page{
+    padding:30px;
+}
+
+.compliance-page h1{
+    color:white;
+    margin-bottom:8px;
+}
+
+.compliance-page p{
+    color:#94A3B8;
+    margin-bottom:25px;
+}
+
+.framework-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.framework-card{
+    background:#1E293B;
+    border:1px solid #334155;
+    border-radius:14px;
+    padding:22px;
+}
+
+.framework-card h3{
+    color:#94A3B8;
+}
+
+.framework-card h2{
+    color:white;
+    margin-top:10px;
+    font-size:34px;
+}
+
+.compliance-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#1E293B;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.compliance-table th,
+.compliance-table td{
+    padding:16px;
+    text-align:left;
+    border-bottom:1px solid #334155;
+}
+
+.compliance-table th{
+    color:#94A3B8;
+}
+
+.compliance-table td{
+    color:white;
+}
